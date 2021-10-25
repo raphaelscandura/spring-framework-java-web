@@ -10,12 +10,7 @@
         <title>Lista empresas</title>
     </head>
     <body>
-        <c:if test="${not empty empresa}">
-            <h3 align="center">Empresa ${empresa} cadastrada com sucesso!</h3>
-        </c:if>
-        <c:if test="${empty empresa}">
-            <h1>Nenhuma empresa foi cadastrada nesse momento</h1>
-        </c:if>
+        <h3 align="center">Empresa ${empresa} cadastrada com sucesso!</h3>
         <hr/>
         <h1>Lista de empresas cadastradas</h1>
         <ul>
