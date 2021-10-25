@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = "/sobre")
+@WebServlet(urlPatterns = "/teste")
 public class HelloWorld extends HttpServlet{
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         PrintWriter out = resp.getWriter();
-        out.println("<html><body><h1>Pagina Sobre</h1></body></html>");
+        out.println("<html><body><h1>Pagina de teste de servlet</h1></body></html>");
     }
 }
