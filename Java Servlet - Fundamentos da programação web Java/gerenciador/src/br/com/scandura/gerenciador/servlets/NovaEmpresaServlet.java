@@ -15,8 +15,10 @@ import java.io.PrintWriter;
 public class NovaEmpresaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String nomeDaEmpresa = req.getParameter("nome");
+        Empresa novaEmpresa = new Empresa(req.getParameter("nome"));
+        BancoDeDados banco = new BancoDeDados();
+        banco.adicionaEmpresa(novaEmpresa);
         PrintWriter out = resp.getWriter();
-        out.println("<html><body><h1>Empresa " + nomeDaEmpresa + " cadastrada com sucesso</h1></body></html>");
+        out.println("<html><body><h1>Empresa " + novaEmpresa.getNome() + " cadastrada com sucesso</h1></body></html>");
     }
 }
