@@ -13,11 +13,11 @@ import java.util.List;
 public class ListaEmpresasServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         BancoDeDados banco = new BancoDeDados();
         List<Empresa> listaDeEmpresas = banco.getListaDeEmpresas();
+        request.setAttribute("listaDeEmpresas", listaDeEmpresas);
         RequestDispatcher rd = request.getRequestDispatcher("/lista-empresas.jsp");
-        request.setAttribute("lista-de-empresas", listaDeEmpresas);
         rd.forward(request, response);
     }
 }

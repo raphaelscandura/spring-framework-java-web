@@ -16,11 +16,15 @@ import java.io.IOException;
 public class NovaEmpresaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Empresa novaEmpresa = new Empresa(request.getParameter("nome"));
-        BancoDeDados banco = new BancoDeDados();
-        banco.adicionaEmpresa(novaEmpresa);
-        RequestDispatcher rd = request.getRequestDispatcher("/resultado-cadastro-empresa.jsp");
-        request.setAttribute("empresa", novaEmpresa.getNome());
-        rd.forward(request, response);
+        if(request.getParameter("nome").equals("")){
+            Empresa novaEmpresa = new Empresa(request.getParameter("nome"));
+            BancoDeDados banco = new BancoDeDados();
+            banco.adicionaEmpresa(novaEmpresa);
+            RequestDispatcher rd = request.getRequestDispatcher("/lista-empresas");
+            request.setAttribute("empresa", novaEmpresa.getNome());
+            rd.forward(request, response);
+        }else{
+            throw new ServletException("É necessário fornecer o nome da empresa que será cadastrada!");
+        }
     }
 }
