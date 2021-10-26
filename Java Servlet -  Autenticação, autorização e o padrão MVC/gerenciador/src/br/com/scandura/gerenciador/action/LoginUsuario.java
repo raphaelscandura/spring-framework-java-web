@@ -6,6 +6,7 @@ import br.com.scandura.gerenciador.model.Usuario;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LoginUsuario implements Action{
@@ -17,6 +18,8 @@ public class LoginUsuario implements Action{
         BancoDeDados banco = new BancoDeDados();
         Usuario usuario = banco.verificaUsuario(login, senha);
         if(usuario != null){
+            HttpSession sessao = request.getSession();
+            sessao.setAttribute("usuarioLogado", usuario);
             return "redirect:control?action=read-empresas";
         }
             return "redirect:control?action=form-login";

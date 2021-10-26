@@ -12,7 +12,7 @@
         <title>Lista empresas</title>
     </head>
     <body>
-        <hr/>
+        <c:import url="logout-parcial.jsp"/>
         <h1>Lista de empresas cadastradas</h1>
         <ul>
             <c:forEach var="empresa" items="${listaDeEmpresas}">
