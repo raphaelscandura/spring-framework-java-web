@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:url value="/create-empresa" var="linkServletNovaEmpresa"/>
+<c:url value="/control?action=create-empresa" var="linkServletNovaEmpresa"/>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

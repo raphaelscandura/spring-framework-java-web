@@ -1,19 +1,17 @@
-package br.com.scandura.gerenciador.servlets;
+package br.com.scandura.gerenciador.action;
+
+import br.com.scandura.gerenciador.model.BancoDeDados;
+import br.com.scandura.gerenciador.model.Empresa;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/read-empresas")
-public class ListaEmpresasServlet extends HttpServlet {
-
-    @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+public class ReadEmpresa {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         BancoDeDados banco = new BancoDeDados();
         List<Empresa> listaDeEmpresas = banco.getListaDeEmpresas();
         request.setAttribute("listaDeEmpresas", listaDeEmpresas);

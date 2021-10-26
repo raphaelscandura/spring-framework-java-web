@@ -1,4 +1,4 @@
-package br.com.scandura.gerenciador.servlets;
+package br.com.scandura.gerenciador.model;
 
 import java.util.Date;
 

@@ -1,7 +1,9 @@
-package br.com.scandura.gerenciador.servlets;
+package br.com.scandura.gerenciador.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class BancoDeDados {
     private static final List<Empresa> empresas = new ArrayList<>();
@@ -33,7 +35,10 @@ public class BancoDeDados {
     }
 
     public Empresa getEmpresa(int id){
-        return getListaDeEmpresas().get(id);
+        return empresas.stream()
+                .filter(empresa -> id == empresa.getId())
+                .findAny()
+                .orElse(null);
     }
 
 }
