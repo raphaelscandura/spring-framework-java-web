@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/lista-empresas")
+@WebServlet(urlPatterns = "/read-empresas")
 public class ListaEmpresasServlet extends HttpServlet {
 
     @Override
