@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class BancoDeDados {
     private static final List<Empresa> empresas = new ArrayList<>();
     private static int id = 0 ;
+    private static List<Usuario> listaUsuarios= new ArrayList<>();
 
     static{
         Empresa empresaTeste1 = new Empresa("Google");
@@ -16,6 +17,11 @@ public class BancoDeDados {
         empresaTeste2.setId(BancoDeDados.id++);
         empresas.add(empresaTeste1);
         empresas.add(empresaTeste2);
+
+        Usuario user1 = new Usuario("raphael", "543216");
+        Usuario user2 = new Usuario("tadeu", "612345");
+        listaUsuarios.add(user1);
+        listaUsuarios.add(user2);
     }
 
     public void adicionaEmpresa(Empresa empresa){
@@ -39,6 +45,15 @@ public class BancoDeDados {
                 .filter(empresa -> id == empresa.getId())
                 .findAny()
                 .orElse(null);
+    }
+
+    public Usuario verificaUsuario(String login, String senha){
+        for(Usuario usuario : listaUsuarios){
+            if(usuario.ehIgual(login, senha)){
+                return usuario;
+            }
+        }
+        return null;
     }
 
 }

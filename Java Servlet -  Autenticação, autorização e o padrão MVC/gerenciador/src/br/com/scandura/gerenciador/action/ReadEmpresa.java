@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class ReadEmpresa {
+public class ReadEmpresa implements Action{
+    @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         BancoDeDados banco = new BancoDeDados();
         List<Empresa> listaDeEmpresas = banco.getListaDeEmpresas();

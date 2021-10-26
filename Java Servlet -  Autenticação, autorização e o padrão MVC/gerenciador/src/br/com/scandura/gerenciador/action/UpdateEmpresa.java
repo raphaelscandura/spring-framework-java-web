@@ -7,7 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class UpdateEmpresa {
+public class UpdateEmpresa implements Action{
+    @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         if(!request.getParameter("nome").equals("")) {
             String paramId = request.getParameter("id");

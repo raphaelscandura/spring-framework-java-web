@@ -47,6 +47,16 @@ public class ServletsController extends HttpServlet {
                 nome = action.execute(request, response);
                 break;
             }
+            case "form-login": {
+                FormLoginUsuario action = new FormLoginUsuario();
+                nome = action.execute(request, response);
+                break;
+            }
+            case "login-usuario": {
+                LoginUsuario action = new LoginUsuario();
+                nome = action.execute(request, response);
+                break;
+            }
             default: {
                 response.sendRedirect("WEB-INF/view/home.html");
             }

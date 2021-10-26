@@ -7,7 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CreateEmpresa {
+public class CreateEmpresa implements Action{
+    @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         if(!request.getParameter("nome").equals("")){
             Empresa novaEmpresa = new Empresa(request.getParameter("nome"));
