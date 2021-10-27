@@ -1,11 +1,15 @@
 package br.com.scandura.loja;
 
-import org.junit.jupiter.api.Test;
+import br.com.scandura.Produto;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class ProdutoTest {
 
     @Test
     public void test(){
-        return;
+        Produto produtoTeste = new Produto("arroz");
+        String nome = produtoTeste.getNome();
+        Assert.assertEquals("arroz", nome);
     }
 }
