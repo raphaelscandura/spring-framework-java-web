@@ -1,19 +1,29 @@
 package br.com.scandura.main;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 public class UpdateTest {
     public static void main(String[] args) throws SQLException {
         Connection con = new ConnectionFactory().getConnection();
 
-        Statement stm = con.createStatement();
-        stm.execute("UPDATE PRODUTO SET nome='Arroz Branco' WHERE id=1");
+        Scanner scn = new Scanner(System.in);
+        System.out.println("Qual o ID do produto que você quer atualizar?");
+        String idProduto = scn.nextLine();
+        System.out.println("Digite o novo nome do produto com ID " + idProduto);
+        String nomeProduto = scn.nextLine();
 
-        Integer modifiedLines = stm.getUpdateCount();
+        PreparedStatement stm = con.prepareStatement("UPDATE PRODUTO SET nome=? WHERE id=?");
 
-        System.out.println(modifiedLines + " linhas foram modificadas do banco de dados");
+        stm.setString(2, idProduto);
+        stm.setString(1, nomeProduto);
+
+        stm.execute();
+
+        new RetrieveTest().printDatabase(con);
 
         con.close();
     }

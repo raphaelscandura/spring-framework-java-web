@@ -1,23 +1,26 @@
 package br.com.scandura.main;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.Scanner;
 
 public class CreateTest {
     public static void main(String[] args) throws SQLException {
+
+        Scanner scn = new Scanner(System.in);
+        System.out.println("Digite o nome do produto que você quer cadastrar no banco de dados:");
+        String nomeProduto = scn.nextLine();
+        System.out.println("Digite a descrição do produto que você quer cadastrar no banco de dados:");
+        String descricaoProduto = scn.nextLine();
+
         Connection con = new ConnectionFactory().getConnection();
 
-        Statement stm = con.createStatement();
-        stm.execute("INSERT INTO PRODUTO (nome, descricao) VALUES ('Arroz Integral', 'Arroz integral marcas variadas')", Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement stm = con.prepareStatement("INSERT INTO PRODUTO (nome, descricao) VALUES (?,?)");
+        stm.setString(1,nomeProduto);
+        stm.setString(2, descricaoProduto);
 
-        ResultSet rst = stm.getGeneratedKeys();
+        stm.execute();
 
-        while(rst.next()){
-            Integer id = rst.getInt(1);
-            System.out.println("O ID usado na criação da nova listagem foi: " + id);
-        }
+        new RetrieveTest().printDatabase(con);
 
         con.close();
     }

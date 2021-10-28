@@ -1,19 +1,17 @@
 package br.com.scandura.main;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DeleteTest {
     public static void main(String[] args) throws SQLException {
         Connection con = new ConnectionFactory().getConnection();
 
-        Statement stm = con.createStatement();
-        stm.execute("DELETE FROM PRODUTO WHERE id > 1");
+        PreparedStatement stm = con.prepareStatement("DELETE FROM PRODUTO WHERE id > 1");
+        stm.execute();
 
-        Integer modifiedLines = stm.getUpdateCount();
-
-        System.out.println(modifiedLines + " linhas foram removidas do banco de dados");
+        new RetrieveTest().printDatabase(con);
 
         con.close();
     }
