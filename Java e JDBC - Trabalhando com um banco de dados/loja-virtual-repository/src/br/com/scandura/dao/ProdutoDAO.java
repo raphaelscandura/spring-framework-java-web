@@ -1,9 +1,10 @@
-package br.com.scandura.jdbc;
+package br.com.scandura.dao;
 
 /*
  Data Acess Object
  */
 
+import br.com.scandura.model.Categoria;
 import br.com.scandura.model.Produto;
 
 import java.sql.*;
@@ -19,9 +20,10 @@ public class ProdutoDAO {
     }
 
     public void create(Produto produto){
-        try(PreparedStatement stm = this.con.prepareStatement("INSERT INTO PRODUTO (nome, descricao) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS)){
+        try(PreparedStatement stm = this.con.prepareStatement("INSERT INTO PRODUTO (nome, descricao, CATEGORIA_ID) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS)){
             stm.setString(1, produto.getNome());
             stm.setString(2, produto.getDescricao());
+            stm.setInt(3, produto.getIdCategoria());
             stm.execute();
             try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -55,7 +57,7 @@ public class ProdutoDAO {
     }
 
     public Produto retrieve(Produto produto) {
-        try(PreparedStatement stm = this.con.prepareStatement("SELECT id, nome, descricao FROM PRODUTO WHERE id=?", Statement.RETURN_GENERATED_KEYS)){
+        try(PreparedStatement stm = this.con.prepareStatement("SELECT id, nome, descricao, CATEGORIA_ID FROM PRODUTO WHERE id=?", Statement.RETURN_GENERATED_KEYS)){
             stm.setString(1, String.valueOf(produto.getId()));
             stm.execute();
 
@@ -66,7 +68,8 @@ public class ProdutoDAO {
             Integer id = rst.getInt("id");
             String nome = rst.getString("nome");
             String descricao = rst.getString("descricao");
-            Produto temp = new Produto(nome, descricao);
+            Integer idCategoria = rst.getInt("CATEGORIA_ID");
+            Produto temp = new Produto(nome, descricao, idCategoria);
             temp.setId(id);
 
             return temp;
@@ -77,7 +80,7 @@ public class ProdutoDAO {
     }
 
     public List<Produto> retrieveAll(){
-        try(PreparedStatement stm = this.con.prepareStatement("SELECT id, nome, descricao FROM PRODUTO", Statement.RETURN_GENERATED_KEYS)){
+        try(PreparedStatement stm = this.con.prepareStatement("SELECT id, nome, descricao, CATEGORIA_ID FROM PRODUTO", Statement.RETURN_GENERATED_KEYS)){
             stm.execute();
             ResultSet rst = stm.getResultSet();
 
@@ -87,7 +90,8 @@ public class ProdutoDAO {
                 Integer id = rst.getInt("id");
                 String nome = rst.getString("nome");
                 String descricao = rst.getString("descricao");
-                Produto temp = new Produto(nome, descricao);
+                Integer idCategoria = rst.getInt("CATEGORIA_ID");
+                Produto temp = new Produto(nome, descricao, idCategoria);
                 temp.setId(id);
                 produtos.add(temp);
             }
@@ -105,5 +109,4 @@ public class ProdutoDAO {
             throwables.printStackTrace();
         }
     }
-
 }
