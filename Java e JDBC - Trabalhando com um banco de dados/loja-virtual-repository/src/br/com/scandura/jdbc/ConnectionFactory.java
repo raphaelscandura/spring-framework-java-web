@@ -1,4 +1,4 @@
-package br.com.scandura.main;
+package br.com.scandura.jdbc;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
