@@ -12,10 +12,10 @@ import java.util.List;
 
 public class ProdutoDAO {
 
-    private Connection con;
+    private final Connection con;
 
-    public ProdutoDAO() throws SQLException {
-        this.con = new ConnectionFactory().getConnection();
+    public ProdutoDAO(Connection connection) throws SQLException {
+        this.con = connection;
     }
 
     public void create(Produto produto){
