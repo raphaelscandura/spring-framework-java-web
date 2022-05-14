@@ -19,9 +19,18 @@ public class ProductRegister {
         dataSetup(em,pDAO,cDAO);
 
         //Read product from the database using ID
-        Product p = pDAO.readOne(1L);
-        System.out.println(p.getPrice());
+        Product pID = pDAO.readById(1L);
+        System.out.println(pID.getPrice());
 
+        //Read product from the database using the name attribute
+        List<Product> pNAME = pDAO.readByName("iPear");
+        pNAME.forEach(products -> System.out.println(products.getName()));
+
+        //Read product from the database using the name attribute
+        List<Product> pCATEGORY = pDAO.readByCategoryName("Phones");
+        pCATEGORY.forEach(products -> System.out.println(products.getName()));
+
+        //Read all products from the database
         List<Product> readAll =  pDAO.readAll();
         readAll.forEach(products -> System.out.println(products.getName()));
     }

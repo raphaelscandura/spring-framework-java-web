@@ -26,8 +26,15 @@ public class CategoryDAO {
         this.em.remove(c);
     }
 
-    public Category readOne(Long id){
+    public Category readById(Long id){
         return em.find(Category.class,id);
+    }
+
+    public List<Category> readByName(String name){
+        String jpql = "SELECT c FROM Category c where c.name=:name";
+        return em.createQuery(jpql, Category.class)
+                .setParameter("name",name)
+                .getResultList();
     }
 
     public List<Category> readAll(){
