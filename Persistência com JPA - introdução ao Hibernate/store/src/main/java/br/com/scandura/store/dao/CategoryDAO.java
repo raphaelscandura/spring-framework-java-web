@@ -11,7 +11,11 @@ public class CategoryDAO {
         this.em=em;
     }
 
-    public void insert(Category p){
-        this.em.persist(p);
+    public void insert(Category d){
+        this.em.persist(d);
+    }
+
+    public void update(Category d){
+        this.em.merge(d);
     }
 }

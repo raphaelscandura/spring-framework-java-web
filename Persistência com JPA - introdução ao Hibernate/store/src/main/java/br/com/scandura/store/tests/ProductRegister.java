@@ -26,6 +26,13 @@ public class ProductRegister {
         
         cDAO.insert(phones);
         pDAO.insert(phone);
+        phone.setName("iFruit");
+
+        em.flush();
+        em.clear();
+
+        cDAO.update(phones);
+        phones.setName("Smartphones");
 
         em.getTransaction().commit();
         em.close();
