@@ -33,6 +33,10 @@ public class ProductRegister {
 
         cDAO.update(phones);
         phones.setName("Smartphones");
+        em.flush();
+        em.clear();
+
+        pDAO.delete(phone);
 
         em.getTransaction().commit();
         em.close();
