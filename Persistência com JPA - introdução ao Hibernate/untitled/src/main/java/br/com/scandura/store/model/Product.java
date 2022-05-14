@@ -2,6 +2,7 @@ package br.com.scandura.store.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="products")
@@ -13,6 +14,36 @@ public class Product {
     private String name;
     private String description;
     private BigDecimal price;
+    private LocalDateTime registration_date = LocalDateTime.now();
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
+    public Product(String name, String description, BigDecimal price, Category category) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category = category;
+    }
+
+    public Product() {
+
+    }
+
+    public LocalDateTime getRegistration_date() {
+        return registration_date;
+    }
+
+    public void setRegistration_date(LocalDateTime registration_date) {
+        this.registration_date = registration_date;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public long getId() {
         return id;
