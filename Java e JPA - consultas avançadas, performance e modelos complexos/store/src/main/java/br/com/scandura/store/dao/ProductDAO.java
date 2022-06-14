@@ -31,7 +31,7 @@ public class ProductDAO {
 
     public List<Product> readByName(String name){
         String jpql = "SELECT p FROM Product p WHERE p.name=:name";
-        return em.createQuery(jpql, Product.class)
+        return em.createNamedQuery("Product.readByName", Product.class)
                 .setParameter("name",name)
                 .getResultList();
     }
