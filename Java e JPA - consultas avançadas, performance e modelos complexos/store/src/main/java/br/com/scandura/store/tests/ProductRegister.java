@@ -6,7 +6,7 @@ import br.com.scandura.store.model.Category;
 import br.com.scandura.store.model.Product;
 import br.com.scandura.store.util.JPAUtil;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -35,13 +35,12 @@ public class ProductRegister {
         readAll.forEach(products -> System.out.println(products.getName()));
     }
 
-    private static void dataSetup(EntityManager em,ProductDAO pDAO,CategoryDAO cDAO) {
+    public static void dataSetup(EntityManager em,ProductDAO pDAO,CategoryDAO cDAO) {
         //Instantiate category
         Category phones = new Category("Phones");
 
         //Instantiate product
         Product phone = new Product("iPear","Very cool electronic device to watch funny m3m3s",new BigDecimal(1250.56),phones);
-
 
         //Insert product & category
         em.getTransaction().begin();
