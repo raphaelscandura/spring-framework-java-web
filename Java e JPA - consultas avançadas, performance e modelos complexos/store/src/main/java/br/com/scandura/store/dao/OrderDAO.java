@@ -1,6 +1,7 @@
 package br.com.scandura.store.dao;
 
 import br.com.scandura.store.model.Order;
+import br.com.scandura.store.vo.SalesReportVo;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -53,5 +54,19 @@ public class OrderDAO {
         String jpql = "SELECT SUM(o.totalPrice) from Order o";
         return em.createQuery(jpql,BigDecimal.class)
                 .getSingleResult();
+    }
+
+    public List<SalesReportVo> salesReport(){
+        String jpql = "SELECT new br.com.scandura.store.vo.SalesReportVo(" +
+                "product.name," +
+                "SUM(item.quantity)," +
+                "MAX(o.date))" +
+                "FROM Order o " +
+                "JOIN o.products item " +
+                "JOIN item.product product " +
+                "GROUP BY product.id " +
+                "ORDER BY item.quantity DESC";
+        return em.createQuery(jpql, SalesReportVo.class)
+                .getResultList();
     }
 }
