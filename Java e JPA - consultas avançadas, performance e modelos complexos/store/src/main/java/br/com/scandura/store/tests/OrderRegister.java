@@ -45,5 +45,6 @@ public class OrderRegister {
         oDAO.insert(o);
 
         em.flush();
+        System.out.println(oDAO.orderTotal());
     }
 }

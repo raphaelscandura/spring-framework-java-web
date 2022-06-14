@@ -3,6 +3,7 @@ package br.com.scandura.store.dao;
 import br.com.scandura.store.model.Order;
 
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class OrderDAO {
@@ -46,5 +47,11 @@ public class OrderDAO {
     public List<Order> readAll(){
         String jpql = "SELECT o FROM Order o";
         return em.createQuery(jpql, Order.class).getResultList();
+    }
+
+    public BigDecimal orderTotal(){
+        String jpql = "SELECT SUM(o.totalPrice) from Order o";
+        return em.createQuery(jpql,BigDecimal.class)
+                .getSingleResult();
     }
 }

@@ -14,7 +14,7 @@ public class Order {
     private Long id;
 
     @Column(name = "total_price")
-    private BigDecimal totalPrice;
+    private BigDecimal totalPrice = BigDecimal.ZERO;
 
     private LocalDateTime date = LocalDateTime.now();
 
@@ -34,6 +34,7 @@ public class Order {
     public void addProduct(ProductOrder product){
         product.setOrder(this);
         this.products.add(product);
+        this.totalPrice = this.totalPrice.add(product.getValue());
     }
 
     public BigDecimal getTotalPrice() {
